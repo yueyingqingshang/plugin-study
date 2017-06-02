@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #323232;
+  font-size: 12px;
+  font-family: 'Microsoft Yahei';
+}
