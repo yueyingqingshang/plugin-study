@@ -1,5 +1,5 @@
 .ui-datepicker-wrapper{
-	width: 240px;
+	width: 260px;
 	margin: 0 auto;
 	font-size: 16px;
 	color: #666;
@@ -16,7 +16,7 @@
 			font-family: serif;
 			font-size: 20px;
 			text-decoration: none;
-			width: 20px;
+			width: 40px;
 			height: 50px;
 			line-height: 50px;
 			color: #1abc9c;
@@ -26,11 +26,51 @@
 		.ui-datepicker-btn:hover {
 			background: #ccc;
 		}
+		.ui-datepicker-btn:active {
+			background: #ddd;
+		}
 		.ui-prev {
 			float: left;
 		}
 		.ui-next {
 			float: right;
 		}
+	}
+	.ui-datepicker-body {
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			th,td {
+				height: 30px;
+				text-align: center;
+			}
+			th {
+				font-size: 12px;
+				height: 40px;
+				line-height: 40px;
+			}
+			td {
+				border: 1px solid #f0f0f0;
+				width: 14%;
+				cursor: pointer;
+			}
+			td:hover {
+				background: #ccc;
+			}
+			td:active {
+				background: #ddd;
+			}
+			tbody {
+				tr {
+					td:first-child {
+						border-left: none;
+					}
+					td:last-child {
+						border-right: none;
+					}
+				}
+			}
+		}
+		
 	}
 }
