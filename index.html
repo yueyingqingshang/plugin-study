@@ -6,13 +6,57 @@
 	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-	<div class="tab">
+	<div class="tab js-tab" >
 		<ul class="tab-nav">
-			<li><a href="#">新闻</a></li>
+			<li class="active"><a href="#">新闻</a></li>
 			<li><a href="#">娱乐</a></li>
 			<li><a href="#">电影</a></li>
 			<li><a href="#">科技</a></li>
 		</ul>
+		<div class="content-wrap">
+			<div class="content-item current">
+				<img src="img/1.jpeg" alt="1.jpeg">
+			</div>
+			<div class="content-item">
+				<img src="img/2.jpeg" alt="2.jpeg">
+			</div>
+			<div class="content-item">
+				<img src="img/3.jpeg" alt="3.jpeg">
+			</div> 
+			<div class="content-item">
+				<img src="img/4.jpeg" alt="4.jpeg">
+			</div>
+		</div>
 	</div>
+	<!-- <p></p> -->
+	<script src='js/jquery-3.1.1.min.js'></script>
+	<script src="js/index.js"></script>
+	<script>
+		$(function() {
+			var config = {
+				triggerType: 'click',
+				effect: 'fade',
+				invoke: 2,
+				auto: 5000
+			},tab = $('.js-tab');
+			var tab = new Tab(tab,config);
+
+
+			(new Promise(function (resolve, reject)	 {
+				resolve();
+			})).then(() => {
+				console.log(3);
+			});
+
+			setTimeout(()=>{
+			    console.log('1')
+			});
+
+
+
+			for (var i = 0; i < 10000000; i++) {}
+			console.log('2')
+		});
+	</script>
 </body>
 </html>
