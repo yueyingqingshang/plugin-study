@@ -28,7 +28,11 @@
                     if(i % 7 == 0) {
                         html += '<tr>';
                     };
-                    html += '<td>'+date.showDate+'</td>';
+                    if(date.isCurrMonth) {
+                        html += '<td><span class="currDay">'+date.showDate+'</span></td>';
+                    } else {
+                        html += '<td><span>'+date.showDate+'</span></td>';
+                    };
                     if(i % 7 == 6) {
                         html += '</tr>';
                     };

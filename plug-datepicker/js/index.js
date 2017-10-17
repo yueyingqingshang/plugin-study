@@ -35,13 +35,16 @@
             var date = (i + 1) - firstDayWeekDay;
             var thisMonth = month;
             var showDate = date;
+            var isCurrMonth = true;
             //判断日期越界（上月、下月）
             if(date<=0) {
                 //上个月
+                isCurrMonth = false;
                 thisMonth = month - 1;
                 showDate = lastDateOfLastMonth + date;
             } else if(date > lastDate) {
                 //下一个月
+                isCurrMonth = false;
                 thisMonth = month + 1;
                 showDate = date - lastDate;
             };
@@ -55,7 +58,8 @@
             ret.push({
                 month: thisMonth,
                 date: date,
-                showDate: showDate
+                showDate: showDate,
+                isCurrMonth: isCurrMonth
             });
         };
         return ret;
