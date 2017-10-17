@@ -18,7 +18,7 @@
         if(firstDayWeekDay == 0) {
             firstDayWeekDay = 7;
         };
-
+        firstDayWeekDay = firstDayWeekDay - 1;
         //获取上一个月的最后一天
         var lastDayOfLastMonth = new Date(year,month - 1,0);
         //获取上一个月最后一天的日期
