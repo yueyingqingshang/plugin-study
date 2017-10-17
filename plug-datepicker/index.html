@@ -6,8 +6,8 @@
 	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-	<div class="ui-datepicker-wrapper">
-		<div class="ui-datepicker-header">
+	 <div class="ui-datepicker-wrapper">
+		<!--<div class="ui-datepicker-header">
 			<a href="javascript:;" class="ui-datepicker-btn ui-prev">&lt;</a>
 			<span class="ui-datepicker-curr-month">2017-10</span>
 			<a href="javascript:;" class="ui-datepicker-btn ui-next">&gt;</a>
@@ -46,7 +46,15 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		</div>-->
 	</div>
+
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript">
+		//var month = datepicker.getMonthData();
+		//console.log(month);
+		datepicker.init(document.querySelector('.ui-datepicker-wrapper'))
+	</script>
 </body>
 </html>
