@@ -1,9 +1,9 @@
 (function() {
     var datepicker = window.datepicker;
-
+    var result;
+    var $wraper;
     datepicker.buildUi = function(year,month) {
-        var result = datepicker.getMonthData(year,month);
-        console.log(result);
+        result = datepicker.getMonthData(year,month);
         var html = '<div class="ui-datepicker-header">'+
     			'<a href="javascript:;" class="ui-datepicker-btn ui-prev">&lt;</a>'+
     			'<span class="ui-datepicker-curr-month">'+result.year+'-'+result.month+'</span>'+
@@ -44,17 +44,22 @@
     };
 
     datepicker.init = function(elClass) {
-        var html = datepicker.buildUi();
-        //<div class="ui-datepicker-wrapper">
-        var $wraper = document.createElement('div');
-        $wraper.className = 'ui-datepicker-wrapper';
-        $wraper.innerHTML = html;
-        document.body.appendChild($wraper);
-
+        datepicker.render();
         var $input = document.querySelector(elClass);
         var $other = document.querySelector('html');
         $wraper.addEventListener('click',function(event) {
             event.stopPropagation();
+            var $target = event.target;
+
+            //上一个月
+            if($target.classList.contains('ui-prev')) {
+                console.log('上一个月');
+                datepicker.render('prev');
+
+            } else if($target.classList.contains('ui-next')) {
+                console.log('下一个月');
+                datepicker.render('next');
+            };
         });
         $other.addEventListener('click',function() {
             $wraper.classList.remove('ui-datepicker-wrapper-show');
@@ -69,5 +74,25 @@
             $wraper.style.left = left + 'px';
         });
 
+    };
+
+    //渲染
+    datepicker.render = function(direction) {
+        var year,month;
+        if(result) {
+            year = result.year;
+            month = result.month;
+        };
+        if(direction == 'prev') {month--;};
+        if(direction == 'next') {month++;};
+        var html = datepicker.buildUi(year,month);
+
+        $wraper = document.querySelector('.ui-datepicker-wrapper');
+        if(!$wraper) {
+            $wraper = document.createElement('div');
+            $wraper.className = 'ui-datepicker-wrapper';
+            document.body.appendChild($wraper);
+        };
+        $wraper.innerHTML = html;
     };
 })();
