@@ -5,7 +5,7 @@
     datepicker.getMonthData = function(year, month) {
         var ret = [];
         //检测是否传入年份月份
-        if(!year || !month) {
+        if(!year || (!month && month != 0)) {
             var today = new Date();
             year = today.getFullYear();
             month = today.getMonth() + 1;

@@ -51,13 +51,11 @@
             event.stopPropagation();
             var $target = event.target;
 
-            //上一个月
             if($target.classList.contains('ui-prev')) {
-                console.log('上一个月');
+                //上一个月
                 datepicker.render('prev');
-
             } else if($target.classList.contains('ui-next')) {
-                console.log('下一个月');
+                //下一个月
                 datepicker.render('next');
             };
         });
@@ -73,7 +71,6 @@
             $wraper.style.top = top + height + 2 + 'px';
             $wraper.style.left = left + 'px';
         });
-
     };
 
     //渲染
