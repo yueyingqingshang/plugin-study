@@ -58,7 +58,8 @@
                 //下一个月
                 datepicker.render('next');
             } else if($target.tagName.toLowerCase() == 'td') {
-                console.log($target.dataset.date);
+                var date = new Date(result.year,result.month,$target.dataset.date);
+                console.log(date);
             };
         });
         $other.addEventListener('click',function() {
