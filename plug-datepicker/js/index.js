@@ -19,6 +19,10 @@
             firstDayWeekDay = 7;
         };
         firstDayWeekDay = firstDayWeekDay - 1;
+
+        //重新设置年份月份
+        year = firstDay.getFullYear();
+        month = firstDay.getMonth() + 1;
         //获取上一个月的最后一天
         var lastDayOfLastMonth = new Date(year,month - 1,0);
         //获取上一个月最后一天的日期
@@ -62,7 +66,11 @@
                 isCurrMonth: isCurrMonth
             });
         };
-        return ret;
+        return {
+            year: year,
+            month: month,
+            days: ret
+        };
     };
     window.datepicker = datepicker;
 })();

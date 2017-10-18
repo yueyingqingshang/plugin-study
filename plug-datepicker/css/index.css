@@ -1,9 +1,13 @@
+body {
+  position: relative;
+}
 .ui-datepicker-wrapper {
   width: 260px;
-  margin: 0 auto;
   font-size: 16px;
   color: #666;
   box-shadow: 2px 2px 8px 2px rgba(128, 128, 128, 0.3);
+  display: none;
+  position: absolute;
 }
 .ui-datepicker-wrapper .ui-datepicker-header {
   height: 50px;
@@ -70,4 +74,7 @@
 }
 .ui-datepicker-wrapper .ui-datepicker-body table tbody tr td:last-child {
   border-right: none;
+}
+.ui-datepicker-wrapper-show {
+  display: block;
 }

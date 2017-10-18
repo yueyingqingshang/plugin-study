@@ -2,11 +2,11 @@
     var datepicker = window.datepicker;
 
     datepicker.buildUi = function(year,month) {
-        var monthData = datepicker.getMonthData(year,month);
-        console.log(monthData);
+        var result = datepicker.getMonthData(year,month);
+        console.log(result);
         var html = '<div class="ui-datepicker-header">'+
     			'<a href="javascript:;" class="ui-datepicker-btn ui-prev">&lt;</a>'+
-    			'<span class="ui-datepicker-curr-month">2017-10</span>'+
+    			'<span class="ui-datepicker-curr-month">'+result.year+'-'+result.month+'</span>'+
     			'<a href="javascript:;" class="ui-datepicker-btn ui-next">&gt;</a>'+
     		'</div>'+
     		'<div class="ui-datepicker-body">'+
@@ -23,8 +23,8 @@
     					'</tr>'+
     				'</thead>'+
     				'<tbody>';
-                for(var i = 0,len = monthData.length;i<len;i++) {
-                    var date = monthData[i];
+                for(var i = 0,len = result.days.length;i<len;i++) {
+                    var date = result.days[i];
                     if(i % 7 == 0) {
                         html += '<tr>';
                     };
@@ -43,8 +43,31 @@
         return html;
     };
 
-    datepicker.init = function($dom) {
+    datepicker.init = function(elClass) {
         var html = datepicker.buildUi();
-        $dom.innerHTML = html;
+        //<div class="ui-datepicker-wrapper">
+        var $wraper = document.createElement('div');
+        $wraper.className = 'ui-datepicker-wrapper';
+        $wraper.innerHTML = html;
+        document.body.appendChild($wraper);
+
+        var $input = document.querySelector(elClass);
+        var $other = document.querySelector('html');
+        $wraper.addEventListener('click',function(event) {
+            event.stopPropagation();
+        });
+        $other.addEventListener('click',function() {
+            $wraper.classList.remove('ui-datepicker-wrapper-show');
+        });
+        $input.addEventListener('click',function(event) {
+            event.stopPropagation();
+            $wraper.classList.add('ui-datepicker-wrapper-show');
+            var left = $input.offsetLeft;
+            var top = $input.offsetTop;
+            var height = $input.offsetHeight;
+            $wraper.style.top = top + height + 2 + 'px';
+            $wraper.style.left = left + 'px';
+        });
+
     };
 })();
