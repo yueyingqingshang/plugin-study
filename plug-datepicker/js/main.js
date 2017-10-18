@@ -29,9 +29,9 @@
                         html += '<tr>';
                     };
                     if(date.isCurrMonth) {
-                        html += '<td><span class="currDay">'+date.showDate+'</span></td>';
+                        html += '<td data-date="'+date.date+'" class="currDay">'+date.showDate+'</td>';
                     } else {
-                        html += '<td><span>'+date.showDate+'</span></td>';
+                        html += '<td data-date="'+date.date+'">'+date.showDate+'</td>';
                     };
                     if(i % 7 == 6) {
                         html += '</tr>';
@@ -57,6 +57,8 @@
             } else if($target.classList.contains('ui-next')) {
                 //下一个月
                 datepicker.render('next');
+            } else if($target.tagName.toLowerCase() == 'td') {
+                console.log($target.dataset.date);
             };
         });
         $other.addEventListener('click',function() {

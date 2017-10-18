@@ -60,7 +60,7 @@ body {
   width: 14%;
   cursor: pointer;
 }
-.ui-datepicker-wrapper .ui-datepicker-body table td .currDay {
+.ui-datepicker-wrapper .ui-datepicker-body table .currDay {
   color: #70D1AA;
 }
 .ui-datepicker-wrapper .ui-datepicker-body table td:hover {
