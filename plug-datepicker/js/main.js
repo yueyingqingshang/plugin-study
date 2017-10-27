@@ -47,8 +47,6 @@
         var initDate , year , month , day, inputVal;
         var $input = document.querySelector(elClass);
         var $other = document.querySelector('html');
-        inputVal = $input.value;
-        console.log(inputVal);
         datepicker.render();
 
         $wraper.addEventListener('click',function(event) {
