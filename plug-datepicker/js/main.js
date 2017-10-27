@@ -44,9 +44,13 @@
     };
 
     datepicker.init = function(elClass) {
-        datepicker.render();
+        var initDate , year , month , day, inputVal;
         var $input = document.querySelector(elClass);
         var $other = document.querySelector('html');
+        inputVal = $input.value;
+        console.log(inputVal);
+        datepicker.render();
+
         $wraper.addEventListener('click',function(event) {
             event.stopPropagation();
             var $target = event.target;
@@ -58,8 +62,21 @@
                 //下一个月
                 datepicker.render('next');
             } else if($target.tagName.toLowerCase() == 'td') {
-                var date = new Date(result.year,result.month,$target.dataset.date);
+                var date = new Date(result.year,result.month - 1,$target.dataset.date);
+                var newDate = formatDate(date);
+                console.log(newDate);
+                var str = '';
+                str += newDate.year + '-' + newDate.month + '-' + newDate.day;
+                $input.value = str;
+                $wraper.classList.remove('ui-datepicker-wrapper-show');
+            };
+            function formatDate(date) {
+                var newDate = {};
                 console.log(date);
+                newDate.year = date.getFullYear();
+                newDate.month = (date.getMonth() + 1) < 9 ? '0'+ (date.getMonth() + 1) : (date.getMonth() + 1);
+                newDate.day = (date.getDate() < 9) ? '0' + date.getDate() : date.getDate();
+                return newDate;
             };
         });
         $other.addEventListener('click',function() {
@@ -68,6 +85,12 @@
         $input.addEventListener('click',function(event) {
             event.stopPropagation();
             $wraper.classList.add('ui-datepicker-wrapper-show');
+            inputVal = $input.value;
+            if(inputVal) {
+                 result.year = inputVal.split('-')[0];
+                 result.month = inputVal.split('-')[1];
+                 datepicker.render();
+            };
             var left = $input.offsetLeft;
             var top = $input.offsetTop;
             var height = $input.offsetHeight;
