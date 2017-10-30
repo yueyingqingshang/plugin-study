@@ -1,8 +1,7 @@
 ;(function(win) {
     var precision = 100;
     var hearts = [];
-    function Heart(dom,x,y) {
-        var self = this;
+    function Heart(dom,setting) {
         var canvas = document.getElementById(dom);
         var ctx = canvas.getContext('2d');
         var winW = win.innerWidth;
@@ -13,6 +12,16 @@
         ctx.shadowBlur = 25;
         ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
         var mouseMoved = false;
+
+        //默认配置
+        this.config = {
+            start: '2016-10-01'
+        };
+        if(setting) {
+            for(var i in setting) {
+                this.config[i] = setting[i];
+            };
+        };
         this.canvas = canvas;
         this.ctx = ctx;
         this.winW = winW;
@@ -20,8 +29,9 @@
         this.mouseMoved = mouseMoved;
         this.dom = dom;
 
-        this.x = x || Math.random() * this.winW;
-        this.y = y || Math.random() * this.winH;
+        //桃心坐标
+        this.x = this.config.x || Math.random() * this.winW;
+        this.y = this.config.y || Math.random() * this.winH;
         this.size = Math.random()*2 + 1;
         this.shadowBlur = Math.random() * 10;
         this.speedX = (Math.random()+0.2-0.6) * 8;
@@ -68,13 +78,13 @@
     };
     //渲染
     Heart.prototype.render = function() {
-        //requestAnimationFrame(render);
-        // setTimeout(()=> {
-        //     this.render();
-        // },50);
         win.requestAnimationFrame(()=>{
             this.render();
         });
+        // var self = this;
+        // setTimeout(function() {
+        //     self.render();
+        // },50);
         hearts.push(new Heart(this.dom));
         this.ctx.clearRect(0,0,this.winW,this.winH);
         for (var i = 0; i < hearts.length; i++) {
@@ -110,7 +120,11 @@
     };
     //鼠标移动
     Heart.prototype.onMove = function(e) {
-        hearts.push(new Heart(this.dom,e.clientX,e.clientY));
+        var config = {
+                x: e.clientX,
+                y: e.clientY
+        };
+        hearts.push(new Heart(this.dom,config));
     };
     win.Heart = Heart;
 })(window);
