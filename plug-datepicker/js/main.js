@@ -2,7 +2,7 @@
     var datepicker = window.datepicker;
     var result;
     var $wraper;
-    datepicker.buildUi = function(year,month) {
+    datepicker.buildUi = function(year,month,day) {
         result = datepicker.getMonthData(year,month);
         var html = '<div class="ui-datepicker-header">'+
     			'<a href="javascript:;" class="ui-datepicker-btn ui-prev">&lt;</a>'+
@@ -28,8 +28,13 @@
                     if(i % 7 == 0) {
                         html += '<tr>';
                     };
+                    //判断是否是当月、或者被选择的月
                     if(date.isCurrMonth) {
-                        html += '<td data-date="'+date.date+'" class="currDay">'+date.showDate+'</td>';
+                        if(day == date.showDate || result.day == date.showDate) {
+                            html += '<td data-date="'+date.date+'" class="currMonth currDay">'+date.showDate+'</td>';
+                        } else {
+                            html += '<td data-date="'+date.date+'" class="currMonth">'+date.showDate+'</td>';
+                        };
                     } else {
                         html += '<td data-date="'+date.date+'">'+date.showDate+'</td>';
                     };
@@ -62,7 +67,6 @@
             } else if($target.tagName.toLowerCase() == 'td') {
                 var date = new Date(result.year,result.month - 1,$target.dataset.date);
                 var newDate = formatDate(date);
-                console.log(newDate);
                 var str = '';
                 str += newDate.year + '-' + newDate.month + '-' + newDate.day;
                 $input.value = str;
@@ -87,6 +91,7 @@
             if(inputVal) {
                  result.year = inputVal.split('-')[0];
                  result.month = inputVal.split('-')[1];
+                 result.day = inputVal.split('-')[2];
                  datepicker.render();
             };
             var left = $input.offsetLeft;
@@ -99,14 +104,15 @@
 
     //渲染
     datepicker.render = function(direction) {
-        var year,month;
+        var year,month,day;
         if(result) {
             year = result.year;
             month = result.month;
+            day = result.day;
         };
         if(direction == 'prev') {month--;};
         if(direction == 'next') {month++;};
-        var html = datepicker.buildUi(year,month);
+        var html = datepicker.buildUi(year, month, day);
 
         $wraper = document.querySelector('.ui-datepicker-wrapper');
         if(!$wraper) {
