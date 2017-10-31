@@ -23,17 +23,47 @@
           padding: 0 20px;
         }
         h1 span{
-        	font-size:20px;
+        	font-size: 35px;
         }
     </style>
 </head>
 <body>
+    <h1>
+        <span>猪头！！</span>
+        <br>
+        <span>不知不觉,已经在一起</span>
+        <br>
+        <span class="time"></span>
+        <br>
+        <span>(2016-10-01)</span>
+        <br>
+        <span>前世的脖子估计断了,才换得今生不离不弃.
+            <br>前世的眼睛估计瞎了,才换得今生相依相偎.
+            <br>不管经历过什么,我仍坚信最浪漫的事就是和你一起慢慢变老.
+            <br>相信中间的计时器,将永远继续下去,直至数据溢出.
+        </span>
+    </h1>
     <canvas id="loveConvas"></canvas>
 <script src="js/heart.js"></script>
 <script>
     var heart = new Heart('loveConvas');
     heart.init();
-
+    window.onload = function startTime() {
+        setTime(document.querySelector('.time'),'2016,10,01');
+        ptimer = setTimeout(startTime,1000);
+    };
+    function setTime (obj,time) {
+        var startTime = new Date(time).getTime();
+        var nowTime = new Date().getTime();
+        var diffTime = nowTime - startTime;
+        var newtime = (diffTime / 1000);  // 毫秒/1000
+        var day = parseInt(newtime/86400); // 天  24*60*60*1000
+        var hour = parseInt(newtime/3600)-24*day;    // 小时 60*60 总小时数-过去的小时数=现在的小时数
+        var minute = parseInt(newtime%3600/60); // 分 -(day*24) 以60秒为一整份 取余 剩下秒数 秒数/60 就是分钟数
+        var second = parseInt(newtime % 60);  // 以60秒为一整份 取余 剩下秒数
+        var str = day + '天'+ hour +'小时'+ minute +'小时'+ second +'秒';
+        obj.innerHTML = str;
+    };
 </script>
 </body>
 </html>

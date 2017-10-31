@@ -29,10 +29,16 @@
         this.mouseMoved = mouseMoved;
         this.dom = dom;
 
+        this.loadAttr();
+    };
+
+    Heart.prototype = {};
+    //加载canvas各种属性
+    Heart.prototype.loadAttr = function () {
         //桃心坐标
         this.x = this.config.x || Math.random() * this.winW;
         this.y = this.config.y || Math.random() * this.winH;
-        this.size = Math.random()*2 + 1;
+        this.size = Math.random() * 2 + 1;
         this.shadowBlur = Math.random() * 10;
         this.speedX = (Math.random()+0.2-0.6) * 8;
         this.speedY = (Math.random()+0.2-0.6) * 8;
@@ -47,12 +53,6 @@
             };
             this.vertices.push(vector);
         };
-    };
-
-    Heart.prototype = {};
-    //加载canvas各种属性
-    Heart.prototype.loadAttr = function (x,y) {
-
     };
     Heart.prototype.init = function() {
 
@@ -81,10 +81,6 @@
         win.requestAnimationFrame(()=>{
             this.render();
         });
-        // var self = this;
-        // setTimeout(function() {
-        //     self.render();
-        // },50);
         hearts.push(new Heart(this.dom));
         this.ctx.clearRect(0,0,this.winW,this.winH);
         for (var i = 0; i < hearts.length; i++) {
